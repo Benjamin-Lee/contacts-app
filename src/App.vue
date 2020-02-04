@@ -13,5 +13,9 @@ export default {
   components: {
     Navbar,
   },
+  mounted() {
+    // When the app starts, fetch the contacts from Firestore
+    this.$store.dispatch("bindContacts");
+  },
 };
 </script>
