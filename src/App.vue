@@ -1,20 +1,19 @@
 <template>
   <div id="app">
-    <Navbar />
+    <!-- <Navbar /> -->
+    <h2 class="text-center my-3">Contacts</h2>
     <ContactsList />
     <ContactEntryModal id="henlo" />
   </div>
 </template>
 
 <script>
-import Navbar from "./components/Navbar";
 import ContactsList from "./components/ContactsList";
 import ContactEntryModal from "./components/ContactEntryModal";
 
 export default {
   name: "app",
   components: {
-    Navbar,
     ContactsList,
     ContactEntryModal,
   },
