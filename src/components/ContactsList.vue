@@ -32,6 +32,10 @@
     <b-modal
       v-model="showSelectedContact"
       :title="selectedContact.first_name + ' ' + selectedContact.last_name"
+      scrollable
+      ok-variant="outline-primary"
+      cancel-variant="outline-secondary"
+      cancel-title="Edit"
     >
       <ContactDisplayModal :selectedContact="selectedContact" />
     </b-modal>
