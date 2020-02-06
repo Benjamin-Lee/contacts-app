@@ -10,8 +10,9 @@
           variant="outline-success"
           size="lg"
           class="justify-content-end ml-3"
-          >+</b-button
         >
+          +
+        </b-button>
       </b-col>
     </b-row>
 
@@ -20,24 +21,37 @@
         href="#"
         v-for="(contact, index) in filteredContacts"
         :key="index"
-        @click="show(contact.first_name)"
+        @click="
+          selectedContact = contact;
+          showSelectedContact = true;
+        "
       >
         <h5 class="mb-1">{{ contact.first_name }} {{ contact.last_name }}</h5>
       </b-list-group-item>
     </b-list-group>
+    <b-modal
+      v-model="showSelectedContact"
+      :title="selectedContact.first_name + ' ' + selectedContact.last_name"
+    >
+      <ContactDisplayModal :selectedContact="selectedContact" />
+    </b-modal>
   </b-container>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import Fuse from "fuse.js";
+import ContactDisplayModal from "./ContactDisplayModal";
 
 export default {
   data() {
     return {
       searchTerm: "",
+      selectedContact: {},
+      showSelectedContact: false,
     };
   },
+  components: { ContactDisplayModal },
   computed: {
     fuse: function() {
       return new Fuse(this.contacts, {
@@ -70,8 +84,8 @@ export default {
     ...mapState(["contacts"]),
   },
   methods: {
-    show: function(index) {
-      this.$bvModal.msgBoxOk(index);
+    show: function(contact) {
+      this.$bvModal.msgBoxOk(contact);
     },
   },
 };
