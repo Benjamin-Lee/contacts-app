@@ -1,163 +1,77 @@
 <template>
   <b-container fluid>
     <!-- User Interface controls -->
-    <b-row class="my-4">
-      <b-col>
-        <b-form-group class="my-0">
-          <b-input-group>
-            <b-form-input
-              v-model="filter"
-              type="search"
-              id="filterInput"
-              placeholder="Type to search..."
-            ></b-form-input>
-            <b-input-group-append>
-              <b-button :disabled="!filter" @click="filter = ''"
-                >Clear</b-button
-              >
-            </b-input-group-append>
-          </b-input-group>
-        </b-form-group>
-      </b-col>
-      <b-col sm="2">
-        <b-button variant="outline-success" block>New</b-button>
-      </b-col>
-    </b-row>
-
-    <!-- Main table element -->
-    <b-table
-      show-empty
-      small
-      stacked="md"
-      :items="items"
-      :fields="fields"
-      :current-page="currentPage"
-      :per-page="perPage"
-      :filter="filter"
-      :filterIncludedFields="filterOn"
-      :sort-by.sync="sortBy"
-      :sort-desc.sync="sortDesc"
-      :sort-direction="sortDirection"
-      @filtered="onFiltered"
-      selectable
-      select-mode="single"
-    >
-      <template v-slot:cell(name)="row">
-        {{ row.value.first }} {{ row.value.last }}
-      </template>
-
-      <template v-slot:cell(actions)="row">
+    <b-row class="my-3">
+      <b-col class="d-flex">
+        <b-input-group prepend="Search" size="lg" class="justify-content-start">
+          <b-form-input v-model="searchTerm" trim></b-form-input>
+        </b-input-group>
         <b-button
-          size="sm"
-          @click="info(row.item, row.index, $event.target)"
-          class="mr-1"
-          variant="link"
+          variant="outline-success"
+          size="lg"
+          class="justify-content-end ml-3"
+          >+</b-button
         >
-          Edit
-        </b-button>
-      </template>
-    </b-table>
-
-    <!-- Info modal -->
-    <b-modal
-      :id="infoModal.id"
-      :title="infoModal.title"
-      ok-only
-      @hide="resetInfoModal"
-    >
-      <pre>{{ infoModal.content }}</pre>
-    </b-modal>
-    <b-row>
-      <b-col lg="5" class="mx-auto">
-        <b-pagination
-          v-model="currentPage"
-          :total-rows="totalRows"
-          :per-page="perPage"
-          align="fill"
-          size="sm"
-          class="my-0"
-        ></b-pagination>
       </b-col>
     </b-row>
+
+    <b-list-group>
+      <b-list-group-item
+        href="#"
+        v-for="(contact, index) in filteredContacts"
+        :key="index"
+        @click="show(contact.first_name)"
+      >
+        <h5 class="mb-1">{{ contact.first_name }} {{ contact.last_name }}</h5>
+      </b-list-group-item>
+    </b-list-group>
   </b-container>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import Fuse from "fuse.js";
+
 export default {
   data() {
     return {
-      fields: [
-        {
-          key: "first_name",
-          label: "First name",
-          sortable: true,
-          sortDirection: "desc",
-        },
-        {
-          key: "last_name",
-          label: "Last Name",
-          sortable: true,
-        },
-        {
-          key: "birthdate",
-          label: "Birth Date",
-          formatter: value => {
-            let birthdate = new Date(value.seconds);
-            return birthdate.toLocaleDateString();
-          },
-          sortable: true,
-          sortByFormatted: true,
-          filterByFormatted: true,
-        },
-        { key: "actions", label: "Actions" },
-      ],
-      totalRows: 1,
-      currentPage: 1,
-      perPage: 5,
-      pageOptions: [5, 10, 15],
-      sortBy: "",
-      sortDesc: false,
-      sortDirection: "asc",
-      filter: null,
-      filterOn: [],
-      infoModal: {
-        id: "info-modal",
-        title: "",
-        content: "",
-      },
+      searchTerm: "",
     };
   },
   computed: {
-    sortOptions() {
-      // Create an options list from our fields
-      return this.fields
-        .filter(f => f.sortable)
-        .map(f => {
-          return { text: f.label, value: f.key };
-        });
+    fuse: function() {
+      return new Fuse(this.contacts, {
+        shouldSort: true,
+        threshold: 0.6,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        keys: [
+          "first_name",
+          "last_name",
+          "email",
+          "phone",
+          "address.city",
+          "address.state",
+          "address.line1",
+          "address.line2",
+          "address.zip",
+        ],
+      });
     },
-    items() {
-      return this.$store.state.contacts;
+
+    filteredContacts: function() {
+      if (this.searchTerm.length) {
+        return this.fuse.search(this.searchTerm);
+      }
+      return this.contacts;
     },
-  },
-  mounted() {
-    // Set the initial number of items
-    this.totalRows = this.items.length;
+    ...mapState(["contacts"]),
   },
   methods: {
-    info(item, index, button) {
-      this.infoModal.title = `Row index: ${index}`;
-      this.infoModal.content = JSON.stringify(item, null, 2);
-      this.$root.$emit("bv::show::modal", this.infoModal.id, button);
-    },
-    resetInfoModal() {
-      this.infoModal.title = "";
-      this.infoModal.content = "";
-    },
-    onFiltered(filteredItems) {
-      // Trigger pagination to update the number of buttons/pages due to filtering
-      this.totalRows = filteredItems.length;
-      this.currentPage = 1;
+    show: function(index) {
+      this.$bvModal.msgBoxOk(index);
     },
   },
 };
