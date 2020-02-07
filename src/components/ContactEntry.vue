@@ -1,13 +1,5 @@
 <template>
-  <b-modal
-    :id="this.id"
-    ref="modal"
-    title="Submit Your Name"
-    @show="resetModal"
-    @hidden="resetModal"
-    @ok="handleOk"
-    show
-  >
+  <b-container>
     <b-form-group
       id="fieldset-1"
       label="First Name"
@@ -40,8 +32,17 @@
         trim
       ></b-form-input>
     </b-form-group>
-    <b-card>
-      <b-form-group label="Address" label-size="lg" class="mb-0">
+    <b-form-group label="Email" label-cols-sm="3">
+      <b-form-input type="email"></b-form-input>
+      <b-input-group class="mt-3">
+        <b-form-input type="email" :state="false"></b-form-input>
+      </b-input-group>
+      <b-col class="text-center">
+        <b-button variant="link">Add Another</b-button>
+      </b-col>
+    </b-form-group>
+    <b-form-group label="Address" label-size="lg" class="mb-0">
+      <b-card>
         <b-form-group
           label-cols-sm="3"
           label="Street:"
@@ -77,17 +78,14 @@
         >
           <b-form-input id="nested-country"></b-form-input>
         </b-form-group>
-      </b-form-group>
-    </b-card>
-    <b-button block>Add</b-button>
-  </b-modal>
+        <b-col class="text-center">
+          <b-button variant="link">Add Another</b-button>
+        </b-col>
+      </b-card>
+    </b-form-group>
+  </b-container>
 </template>
 
 <script>
-export default {
-  props: ["id"],
-  mounted() {
-    this.$bvModal.show(this.id);
-  },
-};
+export default {};
 </script>

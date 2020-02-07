@@ -10,6 +10,7 @@
           variant="outline-success"
           size="lg"
           class="justify-content-end ml-3"
+          to="edit"
         >
           +
         </b-button>
@@ -33,11 +34,17 @@
       v-model="showSelectedContact"
       :title="selectedContact.first_name + ' ' + selectedContact.last_name"
       scrollable
-      ok-variant="outline-primary"
-      cancel-variant="outline-secondary"
-      cancel-title="Edit"
     >
       <ContactDisplayModal :selectedContact="selectedContact" />
+      <template v-slot:modal-footer="{ cancel }">
+        <b-button variant="outline-secondary" to="edit">
+          Edit
+        </b-button>
+        <!-- Button with custom close trigger value -->
+        <b-button variant="outline-primary" @click="cancel()">
+          Close
+        </b-button>
+      </template>
     </b-modal>
   </b-container>
 </template>
