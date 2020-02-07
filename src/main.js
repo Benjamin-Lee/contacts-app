@@ -12,8 +12,8 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes: [
-    { path: "/", component: ContactsList },
-    { path: "/edit", component: ContactEntry, name: "edit" },
+    { path: "/", component: ContactsList, name: "contacts" },
+    { path: "/edit", component: ContactEntry, name: "edit", props: true },
   ],
   mode: "history",
 });
