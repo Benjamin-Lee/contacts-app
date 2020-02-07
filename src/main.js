@@ -14,6 +14,7 @@ const router = new VueRouter({
   routes: [
     { path: "/", component: ContactsList, name: "contacts" },
     { path: "/edit", component: ContactEntry, name: "edit", props: true },
+    { path: "/new", component: ContactEntry, name: "new", props: true },
   ],
   mode: "history",
 });

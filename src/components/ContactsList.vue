@@ -10,7 +10,7 @@
           variant="outline-success"
           size="lg"
           class="justify-content-end ml-3"
-          to="edit"
+          to="new"
         >
           +
         </b-button>
