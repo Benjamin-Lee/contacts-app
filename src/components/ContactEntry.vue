@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="mb-4">
     <b-form>
       <!-- First name input -->
       <b-form-group label="First Name" label-for="input-1">
@@ -16,15 +16,15 @@
         <!-- Only use the mb-3 padding if its not the last input -->
         <b-input-group
           v-for="(_email, index) in email"
-          :key="_email"
+          :key="index"
           v-bind:class="{ 'mb-3': index != email.length - 1 }"
         >
-          <b-form-input type="email" :value="_email"></b-form-input>
+          <b-form-input type="email" :value="_email" ref="email"></b-form-input>
         </b-input-group>
         <b-col class="text-center">
           <b-button
             variant="link"
-            @click="email.pop(_email)"
+            @click="email.pop()"
             :disabled="email.length == 1"
           >
             -
@@ -39,7 +39,7 @@
       <b-form-group label="Phone" class="mt-0">
         <b-input-group
           v-for="(_phone, index) in phone"
-          :key="_phone"
+          :key="index"
           v-bind:class="{ 'mb-3': index != phone.length - 1 }"
         >
           <b-form-input type="tel" :value="_phone"></b-form-input>
@@ -47,7 +47,7 @@
         <b-col class="text-center">
           <b-button
             variant="link"
-            @click="phone.pop(_phone)"
+            @click="phone.pop()"
             :disabled="phone.length == 1"
           >
             -
@@ -106,7 +106,7 @@
           <b-col class="text-center">
             <b-button
               variant="link"
-              @click="address.pop(_address)"
+              @click="address.pop()"
               :disabled="address.length == 1"
             >
               -
@@ -118,8 +118,14 @@
         </b-col>
       </b-row>
 
-      <!-- <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button> -->
+      <b-row>
+        <b-col class="text-center">
+          <b-button type="reset" variant="outline-secondary" class="mr-3"
+            >Cancel</b-button
+          >
+          <b-button type="submit" variant="outline-primary">Submit</b-button>
+        </b-col>
+      </b-row>
     </b-form>
   </b-container>
 </template>
