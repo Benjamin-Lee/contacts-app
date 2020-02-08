@@ -3,12 +3,12 @@
     <b-form>
       <!-- First name input -->
       <b-form-group label="First Name" label-for="input-1">
-        <b-form-input id="first_name" v-model="first_name" trim></b-form-input>
+        <b-form-input id="first_name" v-model="first_name" trim />
       </b-form-group>
 
       <!-- Last name input -->
       <b-form-group label="Last Name" label-for="last_name">
-        <b-form-input id="last_name" v-model="last_name" trim></b-form-input>
+        <b-form-input id="last_name" v-model="last_name" trim />
       </b-form-group>
 
       <!-- One or more emails -->
@@ -19,7 +19,7 @@
           :key="index"
           v-bind:class="{ 'mb-3': index != email.length - 1 }"
         >
-          <b-form-input type="email" :value="_email" ref="email"></b-form-input>
+          <b-form-input type="email" :value="_email" ref="email" />
         </b-input-group>
         <b-col class="text-center">
           <b-button
@@ -31,8 +31,8 @@
           </b-button>
           <b-button variant="link" @click="email.push('')">
             +
-          </b-button></b-col
-        >
+          </b-button>
+        </b-col>
       </b-form-group>
 
       <!-- One of more phone numbers -->
@@ -42,7 +42,7 @@
           :key="index"
           v-bind:class="{ 'mb-3': index != phone.length - 1 }"
         >
-          <b-form-input type="tel" :value="_phone"></b-form-input>
+          <b-form-input type="tel" :value="_phone" />
         </b-input-group>
         <b-col class="text-center">
           <b-button
@@ -70,35 +70,20 @@
             <b-col>
               <b-card>
                 <b-form-group label="Line 1" label-for="nested-street">
-                  <b-form-input
-                    id="nested-street"
-                    :value="_address.line1"
-                  ></b-form-input>
+                  <b-form-input id="nested-street" :value="_address.line1" />
                 </b-form-group>
                 <b-form-group label="Line 2" label-for="nested-street">
-                  <b-form-input
-                    id="nested-street"
-                    :value="_address.line2"
-                  ></b-form-input>
+                  <b-form-input id="nested-street" :value="_address.line2" />
                 </b-form-group>
                 <b-form-group label="City" label-for="nested-city">
-                  <b-form-input
-                    id="nested-city"
-                    :value="_address.city"
-                  ></b-form-input>
+                  <b-form-input id="nested-city" :value="_address.city" />
                 </b-form-group>
 
                 <b-form-group label="State" label-for="nested-state">
-                  <b-form-input
-                    id="nested-state"
-                    :value="_address.state"
-                  ></b-form-input>
+                  <b-form-input id="nested-state" :value="_address.state" />
                 </b-form-group>
                 <b-form-group label="Zip" label-for="nested-state" class="mb-0">
-                  <b-form-input
-                    id="nested-state"
-                    :value="_address.zip"
-                  ></b-form-input>
+                  <b-form-input id="nested-state" :value="_address.zip" />
                 </b-form-group>
               </b-card>
             </b-col>
@@ -120,10 +105,10 @@
 
       <b-row>
         <b-col class="text-center">
-          <b-button type="reset" variant="outline-secondary" class="mr-3"
-            >Cancel</b-button
-          >
-          <b-button type="submit" variant="outline-primary">Submit</b-button>
+          <b-button type="reset" variant="outline-secondary" class="mr-3">
+            Cancel
+          </b-button>
+          <b-button type="submit" variant="outline-primary">Save</b-button>
         </b-col>
       </b-row>
     </b-form>

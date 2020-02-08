@@ -4,7 +4,7 @@
     <b-row class="my-3">
       <b-col class="d-flex">
         <b-input-group prepend="Search" size="lg" class="justify-content-start">
-          <b-form-input v-model="searchTerm" trim type="search"></b-form-input>
+          <b-form-input v-model="searchTerm" trim type="search" />
         </b-input-group>
         <b-button
           variant="outline-success"
