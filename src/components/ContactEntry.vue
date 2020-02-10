@@ -11,10 +11,16 @@
           >
             Cancel
           </b-button>
-          <b-button variant="outline-danger" class="mr-3">Delete</b-button>
-          <b-button variant="outline-secondary" class="mr-3" @click="validate"
-            >Validate</b-button
+          <b-button
+            variant="outline-danger"
+            class="mr-3"
+            @click="deleteContact"
           >
+            Delete
+          </b-button>
+          <b-button variant="outline-secondary" class="mr-3" @click="validate">
+            Validate
+          </b-button>
           <b-button type="submit" variant="outline-primary">Save</b-button>
         </b-col>
       </b-row>
@@ -243,6 +249,9 @@ export default {
     },
     onSubmit(evt) {
       evt.preventDefault();
+    },
+    deleteContact() {
+      alert("Deleting!");
     },
   },
   mounted() {
