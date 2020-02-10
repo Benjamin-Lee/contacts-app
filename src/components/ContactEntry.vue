@@ -253,7 +253,20 @@ export default {
       evt.preventDefault();
     },
     deleteContact() {
-      alert("Deleting!");
+      this.$bvModal
+        .msgBoxConfirm(
+          "Are you sure you want to delete this contact? It is permanent!",
+          {
+            okVariant: "outline-danger",
+            cancelVariant: "outline-secondary",
+          }
+        )
+        .then(value => {
+          if (value) {
+            this.$store.dispatch("deleteContact", this.$attrs.id);
+            this.$router.push("/");
+          }
+        });
     },
   },
   mounted() {

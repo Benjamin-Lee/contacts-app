@@ -19,6 +19,11 @@ export default new Vuex.Store({
       // return the promise returned by `bindFirestoreRef`
       return bindFirestoreRef("contacts", db.collection("contacts"));
     }),
+    deleteContact: firestoreAction((context, contactID) => {
+      db.collection("contacts")
+        .doc(contactID)
+        .delete();
+    }),
   },
   modules: {},
 });
