@@ -12,6 +12,7 @@
             Cancel
           </b-button>
           <b-button
+            v-if="$route.path == '/edit'"
             variant="outline-danger"
             class="mr-3"
             @click="deleteContact"
@@ -201,9 +202,10 @@ export default {
     };
   },
   computed: {
+    // We need an interface between <Datepicker>'s date representation (Date) and Firebase's (ISO date)
     _birthdate: {
       get() {
-        // override the defauly birthdate
+        // override the default birthdate to just leave it blank
         if (this.birthdate.length !== 10) {
           return "";
         }
@@ -218,7 +220,7 @@ export default {
       },
 
       set(x) {
-        // turn the Date object back into an ISO string
+        // turn the Date object back into an ISO string if its not empty
         if (x == null) {
           this.birthdate = "";
           return;
