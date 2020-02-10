@@ -34,6 +34,7 @@
       v-model="showSelectedContact"
       :title="selectedContact.first_name + ' ' + selectedContact.last_name"
       scrollable
+      centered
     >
       <ContactDisplayModal :selectedContact="selectedContact" />
       <template v-slot:modal-footer="{ cancel }">

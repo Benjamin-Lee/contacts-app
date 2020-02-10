@@ -241,6 +241,7 @@ export default {
           {
             okVariant: "outline-danger",
             cancelVariant: "outline-secondary",
+            centered: true,
           }
         )
         .then(value => {
@@ -281,6 +282,7 @@ export default {
           {
             okVariant: "outline-danger",
             cancelVariant: "outline-secondary",
+            centered: true,
           }
         )
         .then(value => {
