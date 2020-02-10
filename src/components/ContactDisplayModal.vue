@@ -19,7 +19,7 @@
         </a>
       </dd>
 
-      <template v-if="address.length >= 1">
+      <template v-if="address[0].line1 !== ''">
         <dt class="col-sm-2">Address</dt>
         <dd class="col-sm-10">
           <p class="my-0">

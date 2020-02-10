@@ -24,6 +24,9 @@ export default new Vuex.Store({
         .doc(contactID)
         .delete();
     }),
+    createContact: firestoreAction((context, contact) => {
+      db.collection("contacts").add(contact);
+    }),
   },
   modules: {},
 });

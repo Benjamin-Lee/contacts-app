@@ -247,10 +247,21 @@ export default {
     },
 
     validate() {
-      this.showValidation = !this.showValidation;
+      this.showValidation = true;
+      return true;
     },
     onSubmit(evt) {
       evt.preventDefault();
+      if (this.validate()) {
+        this.$store.dispatch("createContact", {
+          first_name: this.first_name,
+          last_name: this.last_name,
+          email: this.email,
+          phone: this.phone,
+          birthdate: this.birthdate,
+          address: this.address,
+        });
+      }
     },
     deleteContact() {
       this.$bvModal
