@@ -11,6 +11,7 @@
           >
             Cancel
           </b-button>
+          <b-button variant="outline-danger" class="mr-3">Delete</b-button>
           <b-button variant="outline-secondary" class="mr-3" @click="validate"
             >Validate</b-button
           >
@@ -25,7 +26,7 @@
           v-model="first_name"
           trim
           required
-          :state="showValidation ? first_name.length > 0 : null"
+          :state="showValidation && first_name.length < 1 ? false : null"
         />
         <b-form-invalid-feedback>
           First name is required.
@@ -39,7 +40,7 @@
           v-model="last_name"
           trim
           required
-          :state="showValidation ? last_name.length > 0 : null"
+          :state="showValidation && last_name.length < 1 ? false : null"
         />
         <b-form-invalid-feedback>
           Last name is required.
@@ -72,7 +73,7 @@
           type="email"
           v-model="email[index]"
           required
-          :state="showValidation ? email[index].length > 0 : null"
+          :state="showValidation && email[index].length < 1 ? false : null"
         />
         <b-form-invalid-feedback>
           At least one email is required.
@@ -100,7 +101,7 @@
           type="tel"
           required
           v-model="phone[index]"
-          :state="showValidation ? phone[index].length === 10 : null"
+          :state="showValidation && phone[index].length !== 10 ? false : null"
         />
         <b-form-invalid-feedback>
           At least one phone number is required.
