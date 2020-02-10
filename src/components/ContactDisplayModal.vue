@@ -2,9 +2,9 @@
   <div>
     <dl class="row">
       <dt class="col-sm-2">Birthdate</dt>
-      <dd class="col-sm-10">{{ birthdate }}</dd>
-    </dl>
-    <dl class="row">
+      <dd class="col-sm-10">
+        <p class="my-0">{{ birthdate }}</p>
+      </dd>
       <dt class="col-sm-2">Email</dt>
       <dd class="col-sm-10">
         <a v-for="_email in email" :key="_email" :href="'mailto:' + _email">
