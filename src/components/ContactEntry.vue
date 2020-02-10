@@ -1,6 +1,6 @@
 <template>
   <b-container class="mb-4">
-    <b-form @submit="onSubmit" novalidate>
+    <b-form @submit="onSubmit">
       <!-- Controls -->
       <b-row class="mb-3">
         <b-col class="text-center">
@@ -19,10 +19,13 @@
           >
             Delete
           </b-button>
-          <b-button variant="outline-secondary" class="mr-3" @click="validate">
-            Validate
+          <b-button
+            type="submit"
+            variant="outline-primary"
+            @click="showValidation = true"
+          >
+            Save
           </b-button>
-          <b-button type="submit" variant="outline-primary">Save</b-button>
         </b-col>
       </b-row>
 
@@ -107,11 +110,12 @@
           v-bind:class="{ 'mb-3': index !== phone.length - 1 }"
           type="tel"
           required
+          pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$"
           v-model="phone[index]"
-          :state="showValidation && phone[index].length !== 10 ? false : null"
+          :state="showValidation && phone[index].length < 10 ? false : null"
         />
         <b-form-invalid-feedback>
-          At least one phone number is required.
+          At least one phone number with area code is required.
         </b-form-invalid-feedback>
         <b-col class="text-center">
           <b-button
@@ -245,23 +249,20 @@ export default {
           }
         });
     },
-
-    validate() {
-      this.showValidation = true;
-      return true;
-    },
     onSubmit(evt) {
       evt.preventDefault();
-      if (this.validate()) {
-        this.$store.dispatch("createContact", {
+      this.$store
+        .dispatch("createContact", {
           first_name: this.first_name,
           last_name: this.last_name,
           email: this.email,
-          phone: this.phone,
+          phone: this.phone.map(number =>
+            [...number].filter(x => !isNaN(x)).join("")
+          ),
           birthdate: this.birthdate,
           address: this.address,
-        });
-      }
+        })
+        .then(this.$router.push("/"));
     },
     deleteContact() {
       this.$bvModal
