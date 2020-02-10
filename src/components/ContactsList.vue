@@ -39,7 +39,10 @@
       <template v-slot:modal-footer="{ cancel }">
         <b-button
           variant="outline-secondary"
-          :to="{ name: 'edit', params: { contact: selectedContact } }"
+          :to="{
+            name: 'edit',
+            params: { contact: selectedContact, id: selectedContact.id },
+          }"
         >
           Edit
         </b-button>
