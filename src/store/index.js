@@ -27,6 +27,11 @@ export default new Vuex.Store({
     createContact: firestoreAction((context, contact) => {
       db.collection("contacts").add(contact);
     }),
+    overwriteContact: firestoreAction((context, payload) => {
+      db.collection("contacts")
+        .doc(payload.contactID)
+        .set(payload.contact);
+    }),
   },
   modules: {},
 });

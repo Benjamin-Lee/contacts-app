@@ -251,18 +251,28 @@ export default {
     },
     onSubmit(evt) {
       evt.preventDefault();
-      this.$store
-        .dispatch("createContact", {
-          first_name: this.first_name,
-          last_name: this.last_name,
-          email: this.email,
-          phone: this.phone.map(number =>
-            [...number].filter(x => !isNaN(x)).join("")
-          ),
-          birthdate: this.birthdate,
-          address: this.address,
-        })
-        .then(this.$router.push("/"));
+      let contact = {
+        first_name: this.first_name,
+        last_name: this.last_name,
+        email: this.email,
+        phone: this.phone.map(number =>
+          [...number].filter(x => !isNaN(x)).join("")
+        ),
+        birthdate: this.birthdate,
+        address: this.address,
+      };
+      if (this.$route.path === "/new") {
+        this.$store
+          .dispatch("createContact", contact)
+          .then(this.$router.push("/"));
+      } else if (this.$route.path === "/edit") {
+        this.$store
+          .dispatch("overwriteContact", {
+            contactID: this.$attrs.id,
+            contact: contact,
+          })
+          .then(this.$router.push("/"));
+      }
     },
     deleteContact() {
       this.$bvModal
