@@ -136,27 +136,42 @@
         <b-col cols="12" class="mb-2">Address</b-col>
         <b-col class="pl-2 pr-3">
           <b-row
-            v-for="(_address, index) in address"
+            v-for="(_, index) in address"
             :key="index"
             v-bind:class="{ 'mb-3': index !== address.length - 1 }"
           >
             <b-col>
               <b-card>
                 <b-form-group label="Line 1" label-for="nested-street">
-                  <b-form-input id="nested-street" :value="_address.line1" />
+                  <b-form-input
+                    id="nested-street"
+                    v-model="address[index].line1"
+                  />
                 </b-form-group>
                 <b-form-group label="Line 2" label-for="nested-street">
-                  <b-form-input id="nested-street" :value="_address.line2" />
+                  <b-form-input
+                    id="nested-street"
+                    v-model="address[index].line2"
+                  />
                 </b-form-group>
                 <b-form-group label="City" label-for="nested-city">
-                  <b-form-input id="nested-city" :value="_address.city" />
+                  <b-form-input
+                    id="nested-city"
+                    v-model="address[index].city"
+                  />
                 </b-form-group>
 
                 <b-form-group label="State" label-for="nested-state">
-                  <b-form-input id="nested-state" :value="_address.state" />
+                  <b-form-input
+                    id="nested-state"
+                    v-model="address[index].state"
+                  />
                 </b-form-group>
                 <b-form-group label="Zip" label-for="nested-state" class="mb-0">
-                  <b-form-input id="nested-state" :value="_address.zip" />
+                  <b-form-input
+                    id="nested-state"
+                    v-model="address[index].zip"
+                  />
                 </b-form-group>
               </b-card>
             </b-col>
