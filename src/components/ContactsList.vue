@@ -67,6 +67,7 @@ export default {
   },
   components: { ContactDisplayModal },
   computed: {
+    // intialize the contacts search with params
     fuse: function() {
       return new Fuse(this.contacts, {
         shouldSort: true,
@@ -90,11 +91,14 @@ export default {
     },
 
     filteredContacts: function() {
+      // perform the search, if given
       if (this.searchTerm.length) {
         return this.fuse.search(this.searchTerm);
       }
       return this.contacts;
     },
+
+    // and bind the contacts list
     ...mapState(["contacts"]),
   },
   methods: {
