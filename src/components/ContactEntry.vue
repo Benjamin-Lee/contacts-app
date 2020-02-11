@@ -4,7 +4,6 @@
       <!-- First name input -->
       <b-form-group label="First Name" label-for="input-1">
         <b-form-input
-          id="first_name"
           v-model="first_name"
           trim
           required
@@ -18,7 +17,6 @@
       <!-- Last name input -->
       <b-form-group label="Last Name" label-for="last_name">
         <b-form-input
-          id="last_name"
           v-model="last_name"
           trim
           required
@@ -55,6 +53,7 @@
           type="email"
           v-model="email[index]"
           required
+          trim
           :state="showValidation && email[index].length < 1 ? false : null"
         />
         <b-form-invalid-feedback>
@@ -82,6 +81,7 @@
           v-bind:class="{ 'mb-3': index !== phone.length - 1 }"
           type="tel"
           required
+          trim
           pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$"
           v-model="phone[index]"
           :state="showValidation && phone[index].length < 10 ? false : null"
@@ -114,36 +114,21 @@
           >
             <b-col>
               <b-card>
-                <b-form-group label="Line 1" label-for="nested-street">
-                  <b-form-input
-                    id="nested-street"
-                    v-model="address[index].line1"
-                  />
+                <b-form-group label="Line 1">
+                  <b-form-input v-model="address[index].line1" trim />
                 </b-form-group>
-                <b-form-group label="Line 2" label-for="nested-street">
-                  <b-form-input
-                    id="nested-street"
-                    v-model="address[index].line2"
-                  />
+                <b-form-group label="Line 2">
+                  <b-form-input v-model="address[index].line2" trim />
                 </b-form-group>
-                <b-form-group label="City" label-for="nested-city">
-                  <b-form-input
-                    id="nested-city"
-                    v-model="address[index].city"
-                  />
+                <b-form-group label="City">
+                  <b-form-input v-model="address[index].city" trim />
                 </b-form-group>
 
-                <b-form-group label="State" label-for="nested-state">
-                  <b-form-input
-                    id="nested-state"
-                    v-model="address[index].state"
-                  />
+                <b-form-group label="State">
+                  <b-form-input v-model="address[index].state" trim />
                 </b-form-group>
-                <b-form-group label="Zip" label-for="nested-state" class="mb-0">
-                  <b-form-input
-                    id="nested-state"
-                    v-model="address[index].zip"
-                  />
+                <b-form-group label="Zip" class="mb-0">
+                  <b-form-input v-model="address[index].zip" trim />
                 </b-form-group>
               </b-card>
             </b-col>
