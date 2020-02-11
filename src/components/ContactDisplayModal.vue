@@ -24,7 +24,7 @@
         <p class="my-0" v-for="(_address, index) in address" :key="index">
           {{ _address.line1 }},
           {{ _address.line2 ? _address.line2 + "," : "" }}
-          {{ _address.city }} {{ _address.zip }}, {{ _address.state }}
+          {{ _address.city }}, {{ _address.state }} {{ _address.zip }}
         </p>
       </dd>
     </dl>
