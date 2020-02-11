@@ -37,19 +37,15 @@
       centered
     >
       <ContactDisplayModal :selectedContact="selectedContact" />
-      <template v-slot:modal-footer="{ cancel }">
+      <template v-slot:modal-footer>
         <b-button
-          variant="outline-secondary"
+          variant="outline-primary"
           :to="{
             name: 'edit',
             params: { contact: selectedContact, id: selectedContact.id },
           }"
         >
           Edit
-        </b-button>
-        <!-- Button with custom close trigger value -->
-        <b-button variant="outline-primary" @click="cancel()">
-          Close
         </b-button>
       </template>
     </b-modal>
