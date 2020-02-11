@@ -1,34 +1,6 @@
 <template>
   <b-container class="mb-4">
     <b-form @submit="onSubmit">
-      <!-- Controls -->
-      <b-row class="mb-3">
-        <b-col class="text-center">
-          <b-button
-            variant="outline-secondary"
-            class="mr-3"
-            @click="beforeCancellation"
-          >
-            Cancel
-          </b-button>
-          <b-button
-            v-if="$route.path == '/edit'"
-            variant="outline-danger"
-            class="mr-3"
-            @click="deleteContact"
-          >
-            Delete
-          </b-button>
-          <b-button
-            type="submit"
-            variant="outline-primary"
-            @click="showValidation = true"
-          >
-            Save
-          </b-button>
-        </b-col>
-      </b-row>
-
       <!-- First name input -->
       <b-form-group label="First Name" label-for="input-1">
         <b-form-input
@@ -188,6 +160,33 @@
               +
             </b-button>
           </b-col>
+        </b-col>
+      </b-row>
+      <!-- Controls -->
+      <b-row class="mb-3">
+        <b-col class="text-center">
+          <b-button
+            variant="outline-secondary"
+            class="mr-3"
+            @click="beforeCancellation"
+          >
+            Cancel
+          </b-button>
+          <b-button
+            v-if="$route.path == '/edit'"
+            variant="outline-danger"
+            class="mr-3"
+            @click="deleteContact"
+          >
+            Delete
+          </b-button>
+          <b-button
+            type="submit"
+            variant="outline-primary"
+            @click="showValidation = true"
+          >
+            Save
+          </b-button>
         </b-col>
       </b-row>
     </b-form>
