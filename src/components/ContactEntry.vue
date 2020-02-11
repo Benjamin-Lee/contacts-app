@@ -147,6 +147,7 @@
           </b-col>
         </b-col>
       </b-row>
+
       <!-- Controls -->
       <b-row class="mb-3">
         <b-col class="text-center">
@@ -200,7 +201,7 @@ export default {
   },
   data() {
     return {
-      showValidation: false,
+      showValidation: false, // determines whether to show the bootstrap form feedback
       ...this.contact,
     };
   },
@@ -250,7 +251,10 @@ export default {
         });
     },
     onSubmit(evt) {
+      // prevent the default form behavior
       evt.preventDefault();
+
+      // create the object we'll insert into the db
       let contact = {
         first_name: this.first_name,
         last_name: this.last_name,
@@ -261,6 +265,8 @@ export default {
         birthdate: this.birthdate,
         address: this.address,
       };
+
+      // we need a different action depending on which route we're using
       if (this.$route.path === "/new") {
         this.$store
           .dispatch("createContact", contact)
